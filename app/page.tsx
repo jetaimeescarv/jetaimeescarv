@@ -185,6 +185,20 @@ function ProductSlider({
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleHeroVideoTap = () => {
+    const video = heroVideoRef.current;
+
+    if (!video) return;
+
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
+
   const storyRef = useRef<HTMLElement | null>(null);
   const [storyVisible, setStoryVisible] = useState(false);
 
@@ -332,18 +346,20 @@ export default function Home() {
         className="relative h-[100svh] min-h-[680px] w-full overflow-hidden bg-[#2d211e]"
       >
         <video
-          src="/videos/IMG_7498.MOV"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+  ref={heroVideoRef}
+  src="/videos/IMG_7498.MOV"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="metadata"
+  onClick={handleHeroVideoTap}
+  className="absolute inset-0 h-full w-full object-cover"
+/>
 
-        <div className="absolute inset-0 bg-black/20" />
+       <div className="pointer-events-none absolute inset-0 bg-black/20" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/15" />
+<div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/15" />
 
         <div className="pointer-events-none absolute inset-5 border border-white/30 md:inset-8" />
 
